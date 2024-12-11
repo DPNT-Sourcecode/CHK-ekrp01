@@ -44,7 +44,10 @@ def checkout(skus: str) -> int:
             remaining_count = count % special_offer.quantity
             checkout_total += special_offer_count * special_offer.price
             checkout_total += remaining_count * SKUS[sku].price
+        else:
+            checkout_total += count * SKUS[sku].price
 
     return checkout_total
+
 
 

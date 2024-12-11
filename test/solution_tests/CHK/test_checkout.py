@@ -33,13 +33,13 @@ def test_checkout_invalid(skus: Any, expected: int) -> None:
         ("D", 15),
         ("DD", 30),
         ("ABCD", 115),
-        ("ABCDABCD", 230),
-        ("ABCDABCDABCD", 310),
+        ("AAABBCD", 210),
     ],
 )
 def test_(skus: str, expected: int) -> None:
     result = checkout_solution.checkout(skus)
 
     assert result == expected
+
 
 
