@@ -1,19 +1,18 @@
 import sys
 
+from runner.user_input_action import get_user_input
+from runner.utils import Utils
+from solutions.ARRS import array_sum
+from solutions.CHK import checkout_solution
+from solutions.CHL import checklite_solution
+from solutions.FIZ import fizz_buzz_solution
+from solutions.HLO import hello_solution
+from solutions.IRNG import int_range
+from solutions.SUM import sum_solution
 from tdl.queue.queue_based_implementation_runner import (
     QueueBasedImplementationRunnerBuilder,
 )
 from tdl.runner.challenge_session import ChallengeSession
-
-from lib.runner.user_input_action import get_user_input
-from lib.runner.utils import Utils
-from lib.solutions.ARRS import array_sum
-from lib.solutions.CHK import checkout_solution
-from lib.solutions.CHL import checklite_solution
-from lib.solutions.FIZ import fizz_buzz_solution
-from lib.solutions.HLO import hello_solution
-from lib.solutions.IRNG import int_range
-from lib.solutions.SUM import sum_solution
 
 """
   ~~~~~~~~~~ Running the system: ~~~~~~~~~~~~~
