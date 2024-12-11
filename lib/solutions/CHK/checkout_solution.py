@@ -29,6 +29,7 @@ SKUS = {
     "C": SKU("C", 20),
     "D": SKU("D", 15),
     "E": SKU("E", 40, free_offer=FreeOffer(2, "B", 1)),
+    "F": SKU("F", 10, special_offers=[SpecialOffer(3, 20)]),
 }
 
 
@@ -79,3 +80,4 @@ def checkout(skus: str) -> int:
         checkout_total += count * SKUS[sku].price
 
     return checkout_total
+
