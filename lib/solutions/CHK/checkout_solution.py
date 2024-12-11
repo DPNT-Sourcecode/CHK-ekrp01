@@ -1,6 +1,7 @@
 from collections import Counter
+from collections.abc import Generator
 from dataclasses import dataclass
-from typing import Generator, TypeVar
+from typing import TypeVar
 
 
 @dataclass
@@ -141,5 +142,6 @@ T = TypeVar("T")
 def _chunk(l: list[T], n: int) -> Generator[list[T], None, None]:
     for i in range(0, len(l), n):
         yield l[i : i + n]
+
 
 

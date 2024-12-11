@@ -67,21 +67,30 @@ def test_checkout_invalid(skus: Any, expected: int) -> None:
         ("RRRQ", 150),
         ("RRRQQ", 180),
         ("RRRQQQQ", 230),
-        ("S", 30),
+        ("S", 20),
         ("T", 20),
         ("U", 40),
         ("UUU", 120),
         ("UUUU", 120),
         ("V", 50),
         ("W", 20),
-        ("X", 90),
-        ("Y", 10),
-        ("Z", 50),
+        ("X", 17),
+        ("Y", 20),
+        ("Z", 21),
         ("SSS", 45),
+        ("STX", 45),
+        ("XYZ", 45),
+        ("SSSS", 65),
+        ("TTTT", 65),
+        ("XXXX", 62),
+        ("YYYY", 65),
+        ("ZZZZ", 66),
+        ("ZSSTTTTXXX", 152),
     ],
 )
 def test_checkout(skus: str, expected: int) -> None:
     result = checkout_solution.checkout(skus)
 
     assert result == expected
+
 
