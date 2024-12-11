@@ -92,6 +92,23 @@ def checkout(skus: str) -> int:
             if free_item in sku_counts:
                 sku_counts[free_item] = max(0, sku_counts[free_item] - free_item_count)
 
+    group_items = GROUP_DISCOUNT_STXYZ.items
+    group_count = sum(sku_counts.get(item, 0) for item in group_items)
+    group_price = GROUP_DISCOUNT_STXYZ.price
+    group_quantity = GROUP_DISCOUNT_STXYZ.quantity
+    group_discount_count = group_count // group_quantity
+    checkout_total += group_discount_count * group_price
+
+    sku_counts_in_group_discount = {sku: count for sku, count in sku_counts.items() if sku in group_items}
+    total_items_in_group_discount = sum(sku_counts_in_group_discount.values())
+    skus_in_group_discount_by_price = sorted(sku_counts_in_group_discount, key=lambda x: SKUS[x].price, reverse=True)
+    skus_in_group_discount: list[str] = []
+    for sku in skus_in_group_discount_by_price:
+        skus_in_group_discount.extend([sku] * sku_counts_in_group_discount[sku])
+
+    for sku in sorted(group_items, key=lambda x: SKUS[x].price, reverse=True):
+
+
     for sku, count in sku_counts.items():
         special_offers = SKUS[sku].special_offers
 
@@ -110,3 +127,4 @@ def checkout(skus: str) -> int:
         checkout_total += count * SKUS[sku].price
 
     return checkout_total
+
