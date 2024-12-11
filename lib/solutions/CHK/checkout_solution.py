@@ -23,6 +23,16 @@ class SKU:
     free_offer: FreeOffer | None = None
 
 
+@dataclass
+class GroupDiscount:
+    items: list[str]
+    quantity: int
+    price: int
+
+
+GROUP_DISCOUNT_STXYZ = GroupDiscount(["S", "T", "X", "Y", "Z"], 3, 45)
+
+
 SKUS = {
     "A": SKU("A", 50, special_offers=[SpecialOffer(3, 130), SpecialOffer(5, 200)]),
     "B": SKU("B", 30, special_offers=[SpecialOffer(2, 45)]),
@@ -100,4 +110,5 @@ def checkout(skus: str) -> int:
         checkout_total += count * SKUS[sku].price
 
     return checkout_total
+
 
