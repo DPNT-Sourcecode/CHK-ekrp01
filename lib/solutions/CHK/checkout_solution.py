@@ -34,7 +34,7 @@ SKUS = {
     "H": SKU("H", 10, special_offers=[SpecialOffer(5, 45), SpecialOffer(10, 80)]),
     "I": SKU("I", 35),
     "J": SKU("J", 60),
-    "K": SKU("K", 80, special_offers=[SpecialOffer(2, 150)]),
+    "K": SKU("K", 70, special_offers=[SpecialOffer(2, 120)]),
     "L": SKU("L", 90),
     "M": SKU("M", 15),
     "N": SKU("N", 40, free_offer=FreeOffer(3, "M", 1)),
@@ -42,14 +42,14 @@ SKUS = {
     "P": SKU("P", 50, special_offers=[SpecialOffer(5, 200)]),
     "Q": SKU("Q", 30, special_offers=[SpecialOffer(3, 80)]),
     "R": SKU("R", 50, free_offer=FreeOffer(3, "Q", 1)),
-    "S": SKU("S", 30),
+    "S": SKU("S", 20),
     "T": SKU("T", 20),
     "U": SKU("U", 40, special_offers=[SpecialOffer(4, 120)]),
     "V": SKU("V", 50, special_offers=[SpecialOffer(2, 90), SpecialOffer(3, 130)]),
     "W": SKU("W", 20),
-    "X": SKU("X", 90),
-    "Y": SKU("Y", 10),
-    "Z": SKU("Z", 50),
+    "X": SKU("X", 17),
+    "Y": SKU("Y", 20),
+    "Z": SKU("Z", 21),
 }
 
 
@@ -100,3 +100,4 @@ def checkout(skus: str) -> int:
         checkout_total += count * SKUS[sku].price
 
     return checkout_total
+
