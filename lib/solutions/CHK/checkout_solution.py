@@ -9,17 +9,26 @@ class SpecialOffer:
 
 
 @dataclass
+class FreeOffer:
+    required_quantity: int
+    free_item: str
+    free_quantity: int
+
+
+@dataclass
 class SKU:
     name: str
     price: int
-    special_offer: SpecialOffer | None = None
+    special_offers: list[SpecialOffer] | None = None
+    free_offer: FreeOffer | None = None
 
 
 SKUS = {
-    "A": SKU("A", 50, SpecialOffer(3, 130)),
-    "B": SKU("B", 30, SpecialOffer(2, 45)),
+    "A": SKU("A", 50, special_offers=[SpecialOffer(3, 130), SpecialOffer(5, 200)]),
+    "B": SKU("B", 30, special_offers=[SpecialOffer(2, 45)]),
     "C": SKU("C", 20),
     "D": SKU("D", 15),
+    "E": SKU("E", 40, free_offer=FreeOffer(2, "B", 1)),
 }
 
 
@@ -51,3 +60,4 @@ def checkout(skus: str) -> int:
             checkout_total += count * SKUS[sku].price
 
     return checkout_total
+
