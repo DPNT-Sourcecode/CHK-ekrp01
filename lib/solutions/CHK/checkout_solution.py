@@ -46,6 +46,7 @@ def checkout(skus: str) -> int:
     sku_counts = Counter(skus)
 
     for sku, count in sku_counts.items():
+        # breakpoint()
         if sku not in SKUS:
             return -1
 
@@ -60,6 +61,7 @@ def checkout(skus: str) -> int:
             if free_item in sku_counts:
                 sku_counts[free_item] = max(0, sku_counts[free_item] - free_item_count)
 
+    for sku, count in sku_counts.items():
         special_offers = SKUS[sku].special_offers
 
         if special_offers:
@@ -77,6 +79,7 @@ def checkout(skus: str) -> int:
         checkout_total += count * SKUS[sku].price
 
     return checkout_total
+
 
 
 
