@@ -60,16 +60,23 @@ def checkout(skus: str) -> int:
             if free_item in sku_counts:
                 sku_counts[free_item] = max(0, sku_counts[free_item] - free_item_count)
 
-        special_offer = SKUS[sku].special_offer
+        special_offers = SKUS[sku].special_offers
 
-        if special_offer is not None:
-            special_offer_count = count // special_offer.quantity
-            remaining_count = count % special_offer.quantity
-            checkout_total += special_offer_count * special_offer.price
-            checkout_total += remaining_count * SKUS[sku].price
-        else:
-            checkout_total += count * SKUS[sku].price
+        if special_offers:
+            ordered_special_offers = sorted(
+                special_offers, key=lambda x: x.quantity, reverse=True
+            )
+
+            for special_offer in ordered_special_offers:
+                if count >= special_offer.quantity:
+                    special_offer_count = count // special_offer.quantity
+                    remaining_count = count % special_offer.quantity
+                    checkout_total += special_offer_count * special_offer.price
+                    count = remaining_count
+
+        checkout_total += count * SKUS[sku].price
 
     return checkout_total
+
 
 
