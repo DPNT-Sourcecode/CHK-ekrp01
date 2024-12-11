@@ -23,6 +23,7 @@ def test_checkout_invalid(skus: Any, expected: int) -> None:
 @pytest.mark.parametrize(
     ("skus", "expected"),
     [
+        ("", 0),
         ("A", 50),
         ("AA", 100),
         ("AAA", 130),
@@ -40,6 +41,3 @@ def test_(skus: str, expected: int) -> None:
     result = checkout_solution.checkout(skus)
 
     assert result == expected
-
-
-

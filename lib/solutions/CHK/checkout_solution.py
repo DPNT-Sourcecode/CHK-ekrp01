@@ -26,6 +26,9 @@ SKUS = {
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus: str) -> int:
+    if skus == "":
+        return 0
+
     if not isinstance(skus, str) or not skus.isalpha():
         return -1
 
@@ -48,6 +51,3 @@ def checkout(skus: str) -> int:
             checkout_total += count * SKUS[sku].price
 
     return checkout_total
-
-
-
