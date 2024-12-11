@@ -49,6 +49,17 @@ def checkout(skus: str) -> int:
         if sku not in SKUS:
             return -1
 
+        sku_data = SKUS[sku]
+
+        if sku_data.free_offer is not None:
+            free_offer = sku_data.free_offer
+            free_trigger_count = count // free_offer.required_quantity
+            free_item_count = free_offer.free_quantity * free_trigger_count
+
+            free_item = free_offer.free_item
+            if free_item in sku_counts:
+                sku_counts[free_item] = max(0, sku_counts[free_item] - free_item_count)
+
         special_offer = SKUS[sku].special_offer
 
         if special_offer is not None:
@@ -60,4 +71,5 @@ def checkout(skus: str) -> int:
             checkout_total += count * SKUS[sku].price
 
     return checkout_total
+
 
