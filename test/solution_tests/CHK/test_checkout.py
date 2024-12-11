@@ -83,7 +83,3 @@ def test_checkout(skus: str, expected: int) -> None:
     result = checkout_solution.checkout(skus)
 
     assert result == expected
-
-
-
-

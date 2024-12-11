@@ -100,7 +100,3 @@ def checkout(skus: str) -> int:
         checkout_total += count * SKUS[sku].price
 
     return checkout_total
-
-
-
-
