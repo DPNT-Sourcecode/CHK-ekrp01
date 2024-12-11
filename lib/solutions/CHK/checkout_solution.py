@@ -1,5 +1,6 @@
 from collections import Counter
 from dataclasses import dataclass
+from typing import Generator, TypeVar
 
 
 @dataclass
@@ -99,15 +100,20 @@ def checkout(skus: str) -> int:
     group_discount_count = group_count // group_quantity
     checkout_total += group_discount_count * group_price
 
-    sku_counts_in_group_discount = {sku: count for sku, count in sku_counts.items() if sku in group_items}
-    total_items_in_group_discount = sum(sku_counts_in_group_discount.values())
-    skus_in_group_discount_by_price = sorted(sku_counts_in_group_discount, key=lambda x: SKUS[x].price, reverse=True)
+    sku_counts_in_group_discount = {
+        sku: count for sku, count in sku_counts.items() if sku in group_items
+    }
+    skus_in_group_discount_by_price = sorted(
+        sku_counts_in_group_discount, key=lambda x: SKUS[x].price, reverse=True
+    )
     skus_in_group_discount: list[str] = []
     for sku in skus_in_group_discount_by_price:
         skus_in_group_discount.extend([sku] * sku_counts_in_group_discount[sku])
 
-    for sku in sorted(group_items, key=lambda x: SKUS[x].price, reverse=True):
-
+    for sku_chunk in _chunk(skus_in_group_discount, group_quantity):
+        if len(sku_chunk) == group_quantity:
+            for sku in sku_chunk:
+                sku_counts[sku] -= 1
 
     for sku, count in sku_counts.items():
         special_offers = SKUS[sku].special_offers
@@ -127,4 +133,13 @@ def checkout(skus: str) -> int:
         checkout_total += count * SKUS[sku].price
 
     return checkout_total
+
+
+T = TypeVar("T")
+
+
+def _chunk(l: list[T], n: int) -> Generator[list[T], None, None]:
+    for i in range(0, len(l), n):
+        yield l[i : i + n]
+
 
